@@ -23,7 +23,7 @@ function App() {
       <div className="input-area">
         <input
           type="text"
-          name="item"   // required
+          name="item"  
           value={item}
           onChange={(e) => setItem(e.target.value)}
           placeholder="Enter an item"
