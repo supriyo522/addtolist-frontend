@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./App.css";   // import styles
+import "./App.css";
 
 function App() {
   const [item, setItem] = useState("");
@@ -8,17 +8,22 @@ function App() {
   const addItem = () => {
     if (item.trim() !== "") {
       setList([...list, item]);
-      setItem(""); // clear input
+      setItem("");
     }
+  };
+
+  const removeItem = (index) => {
+    const newList = list.filter((_, i) => i !== index);
+    setList(newList);
   };
 
   return (
     <div className="app-container">
-      <h1>Add to List</h1>
+      <h1>Add Items to List</h1>
       <div className="input-area">
         <input
           type="text"
-          name="item"   // required for Cypress test
+          name="item"   // required
           value={item}
           onChange={(e) => setItem(e.target.value)}
           placeholder="Enter an item"
@@ -27,7 +32,10 @@ function App() {
       </div>
       <ul>
         {list.map((listItem, index) => (
-          <li key={index}>{listItem}</li>
+          <li key={index}>
+            {listItem}
+            <button onClick={() => removeItem(index)}>Remove</button>
+          </li>
         ))}
       </ul>
     </div>
